@@ -52,4 +52,14 @@ export class HomePage extends BasePage {
   static get reviewSubmitButton(){
     return cy.get("#submitButton");
   }
+
+  static get cardCount(){
+    return cy.get("[class=\"mat-grid-tile ng-star-inserted\"]");
+  }
+  static get changeCount(){
+    return cy.get("[aria-haspopup=\"listbox\"]");
+  }
+  static get selectCount(){
+    return cy.get(".mdc-list-item__primary-text");
+  }
 }
