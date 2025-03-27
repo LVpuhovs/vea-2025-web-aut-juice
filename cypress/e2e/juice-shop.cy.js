@@ -7,6 +7,9 @@ import {DeliveryMethodPage} from "../pageObjects/DeliveryMethodPage";
 import {PaymentOptionsPage} from "../pageObjects/PaymentOptionsPage";
 import {OrderSummaryPage} from "../pageObjects/OrderSummaryPage";
 import {OrderCompletionPage} from "../pageObjects/OrderCompletionPage";
+import {SavedAddressesPage} from "../pageObjects/SavedAddressesPage";
+import {CreateAddressPage} from "../pageObjects/CreateAddressPage";
+import {SavedPaymentMethodsPage} from "../pageObjects/SavedPaymentMethodsPage";
 
 describe("Juice-shop scenarios", () => {
   context("Without auto login", () => {
@@ -182,7 +185,7 @@ describe("Juice-shop scenarios", () => {
 
 
     // Create scenario - Buy Girlie T-shirt
-    it.only("Buy Girlie T-shirt",  () => {
+    it("Buy Girlie T-shirt",  () => {
       // Click on search icon
       HomePage.searchButton.click();
       // Search for Girlie
@@ -220,27 +223,65 @@ describe("Juice-shop scenarios", () => {
 
 
     // Create scenario - Add address
-    // Click on Account
-    // Click on Orders & Payment
-    // Click on My saved addresses
-    // Create page object - SavedAddressesPage
-    // Click on Add New Address
-    // Create page object - CreateAddressPage
-    // Fill in the necessary information
-    // Click Submit button
-    // Validate that previously added address is visible
+    it("Add address",  () => {
+      // Click on Account
+      HomePage.accountButton.click();
+      // Click on Orders & Payment
+      HomePage.ordersAndPaymentsButton.click();
+      // Click on My saved addresses
+      HomePage.savedAddressButton.click();
+      // Create page object - SavedAddressesPage
+      // Click on Add New Address
+      SavedAddressesPage.addNewAddressButton.click();
+      // Create page object - CreateAddressPage
+      // Fill in the necessary information
+      CreateAddressPage.selectField.contains("Country").click();
+      CreateAddressPage.countryField.type("Latvia");
+      CreateAddressPage.selectField.contains("Name").click();
+      CreateAddressPage.nameField.type("Markuss");
+      CreateAddressPage.selectField.contains("Mobile Number").click();
+      CreateAddressPage.mobileNumberField.type("23412455");
+      CreateAddressPage.selectField.contains("ZIP Code").click();
+      CreateAddressPage.zipCodeField.type("LV-3210");
+      CreateAddressPage.selectField.contains("Address").click();
+      CreateAddressPage.addressField.type("Majas iela 1");
+      CreateAddressPage.selectField.contains("City").click();
+      CreateAddressPage.cityField.type("Pope");
+      CreateAddressPage.selectField.contains("State").click();
+      CreateAddressPage.stateField.type("Turpat");
+      // Click Submit button
+      CreateAddressPage.submitButton.click();
+      // Validate that previously added address is visible
+      SavedAddressesPage.validations.should("contain.text", "Latvia")
+
+    })
 
     // Create scenario - Add payment option
+    it.only("Add payment option",  () => {
     // Click on Account
-    // Click on Orders & Payment
-    // Click on My payment options
-    // Create page object - SavedPaymentMethodsPage
-    // Click Add new card
-    // Fill in Name
-    // Fill in Card Number
-    // Set expiry month to 7
-    // Set expiry year to 2090
-    // Click Submit button
-    // Validate that the card shows up in the list
+      HomePage.accountButton.click();
+      // Click on Orders & Payment
+      HomePage.ordersAndPaymentsButton.click();
+      // Click on My payment options
+      HomePage.paymentsButton.click();
+      // Create page object - SavedPaymentMethodsPage
+      // Click Add new card
+      SavedPaymentMethodsPage.addNewCardButton.click();
+      // Fill in Name
+      SavedPaymentMethodsPage.selectField.contains("Name").click();
+      SavedPaymentMethodsPage.selectField.contains("Name").type("Bob Stone");
+      // Fill in Card Number
+      SavedPaymentMethodsPage.selectField.contains("Card Number").click();
+      SavedPaymentMethodsPage.selectField.contains("Card Number").type("1234567890123456");
+      // Set expiry month to 7
+      SavedPaymentMethodsPage.expiryMonth.select("7");
+      // Set expiry year to 2090
+      SavedPaymentMethodsPage.expiryYear.select("2090");
+      // Click Submit button
+      SavedPaymentMethodsPage.submitButton.click();
+      // Validate that the card shows up in the list
+      SavedPaymentMethodsPage.validate.should("contain.text", "Bob Stone");
+    })
+
   });
 });
