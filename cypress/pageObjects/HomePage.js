@@ -32,9 +32,17 @@ export class HomePage extends BasePage {
   }
 
   static get productClick() {
-    return cy.get('.item-name').contains('Lemon Juice (500ml)');
+    return cy.get('.item-name');
   }
   static get containterInfo(){
     return cy.get(".container");
+  }
+
+  static get closeCardButton(){
+    return cy.get("button[aria-label=\"Close Dialog\"]");
+  }
+
+  static get extendReviews(){
+    return cy.get("[aria-label=\"Expand for Reviews\"]");
   }
 }

@@ -71,42 +71,71 @@ describe("Juice-shop scenarios", () => {
       HomePage.visit();
     });
 
-    it.only("Search and validate Lemon", () => {
+    it("Search and validate Lemon", () => {
       // Click on search icon
       HomePage.searchButton.click();
       // Search for Lemon
       HomePage.searchField.type("Lemon")
       HomePage.searchField.type('{enter}')
       // Select a product card - Lemon Juice (500ml)
-      HomePage.productClick.click();
+      HomePage.productClick.contains('Lemon Juice (500ml)').click();
       // Validate that the card (should) contains "Sour but full of vitamins."
       HomePage.containterInfo.should("contain.text","Sour but full of vitamins.");
     });
-
     // Create scenario - Search 500ml and validate Lemon, while having multiple cards
+    it("Search 500ml and validate Lemon", () => {
     // Click on search icon
+      HomePage.searchButton.click();
     // Search for 500ml
+      HomePage.searchField.type("500ml")
+      HomePage.searchField.type('{enter}')
     // Select a product card - Lemon Juice (500ml)
+      HomePage.productClick.contains('Lemon Juice (500ml)').click();
     // Validate that the card (should) contains "Sour but full of vitamins."
+      HomePage.containterInfo.should("contain.text","Sour but full of vitamins.");
+    })
 
     // Create scenario - Search 500ml and validate cards
-    // Click on search icon
-    // Search for 500ml
-    // Select a product card - Eggfruit Juice (500ml)
-    // Validate that the card (should) contains "Now with even more exotic flavour."
-    // Close the card
-    // Select a product card - Lemon Juice (500ml)
-    // Validate that the card (should) contains "Sour but full of vitamins."
-    // Close the card
-    // Select a product card - Strawberry Juice (500ml)
-    // Validate that the card (should) contains "Sweet & tasty!"
+    it("Search 500ml and validate cards", () => {
+      // Click on search icon
+      HomePage.searchButton.click();
+      // Search for 500ml
+      HomePage.searchField.type("500ml")
+      HomePage.searchField.type('{enter}')
+      // Select a product card - Eggfruit Juice (500ml)
+      HomePage.productClick.contains('Eggfruit Juice (500ml)').click();
+      // Validate that the card (should) contains "Now with even more exotic flavour."
+      HomePage.containterInfo.should("contain.text","Now with even more exotic flavour.");
+      // Close the card
+      HomePage.closeCardButton.click();
+      // Select a product card - Lemon Juice (500ml)
+      HomePage.productClick.contains('Lemon Juice (500ml)').click();
+      // Validate that the card (should) contains "Sour but full of vitamins."
+      HomePage.containterInfo.should("contain.text","Sour but full of vitamins.");
+      // Close the card
+      HomePage.closeCardButton.click();
+      // Select a product card - Strawberry Juice (500ml)
+      HomePage.productClick.contains('Strawberry Juice (500ml)').click();
+      // Validate that the card (should) contains "Sweet & tasty!"
+      HomePage.containterInfo.should("contain.text","Sweet & tasty!");
+    })
+
 
     // Create scenario - Read a review
-    // Click on search icon
-    // Search for King
-    // Select a product card - OWASP Juice Shop "King of the Hill" Facemask
-    // Click expand reviews button/icon (wait for reviews to appear)
-    // Validate review - K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!
+    it.only("Read a review", () => {
+      // Click on search icon
+      HomePage.searchButton.click();
+      // Search for King
+      HomePage.searchField.type("King")
+      HomePage.searchField.type('{enter}')
+      // Select a product card - OWASP Juice Shop "King of the Hill" Facemask
+      HomePage.productClick.contains('King of the Hill').click();
+      // Click expand reviews button/icon (wait for reviews to appear)
+      HomePage.extendReviews.click();
+      // Validate review - K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!
+      HomePage.extendReviews.should("contain.text","K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!")
+    })
+
 
     // Create scenario - Add a review
     // Click on search icon
