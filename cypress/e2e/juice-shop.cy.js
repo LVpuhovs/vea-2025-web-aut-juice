@@ -75,8 +75,8 @@ describe("Juice-shop scenarios", () => {
       // Click on search icon
       HomePage.searchButton.click();
       // Search for Lemon
-      HomePage.searchField.type("Lemon")
-      HomePage.searchField.type('{enter}')
+      HomePage.searchField.type("Lemon");
+      HomePage.searchField.type('{enter}');
       // Select a product card - Lemon Juice (500ml)
       HomePage.productClick.contains('Lemon Juice (500ml)').click();
       // Validate that the card (should) contains "Sour but full of vitamins."
@@ -87,8 +87,8 @@ describe("Juice-shop scenarios", () => {
     // Click on search icon
       HomePage.searchButton.click();
     // Search for 500ml
-      HomePage.searchField.type("500ml")
-      HomePage.searchField.type('{enter}')
+      HomePage.searchField.type("500ml");
+      HomePage.searchField.type('{enter}');
     // Select a product card - Lemon Juice (500ml)
       HomePage.productClick.contains('Lemon Juice (500ml)').click();
     // Validate that the card (should) contains "Sour but full of vitamins."
@@ -100,8 +100,8 @@ describe("Juice-shop scenarios", () => {
       // Click on search icon
       HomePage.searchButton.click();
       // Search for 500ml
-      HomePage.searchField.type("500ml")
-      HomePage.searchField.type('{enter}')
+      HomePage.searchField.type("500ml");
+      HomePage.searchField.type('{enter}');
       // Select a product card - Eggfruit Juice (500ml)
       HomePage.productClick.contains('Eggfruit Juice (500ml)').click();
       // Validate that the card (should) contains "Now with even more exotic flavour."
@@ -122,12 +122,12 @@ describe("Juice-shop scenarios", () => {
 
 
     // Create scenario - Read a review
-    it.only("Read a review", () => {
+    it("Read a review", () => {
       // Click on search icon
       HomePage.searchButton.click();
       // Search for King
-      HomePage.searchField.type("King")
-      HomePage.searchField.type('{enter}')
+      HomePage.searchField.type("King");
+      HomePage.searchField.type('{enter}');
       // Select a product card - OWASP Juice Shop "King of the Hill" Facemask
       HomePage.productClick.contains('King of the Hill').click();
       // Click expand reviews button/icon (wait for reviews to appear)
@@ -138,13 +138,25 @@ describe("Juice-shop scenarios", () => {
 
 
     // Create scenario - Add a review
-    // Click on search icon
-    // Search for Raspberry
-    // Select a product card - Raspberry Juice (1000ml)
-    // Type in review - "Tastes like metal"
-    // Click Submit
-    // Click expand reviews button/icon (wait for reviews to appear)
-    // Validate review -  "Tastes like metal"
+    it.only("Add a review", () => {
+      // Click on search icon
+      HomePage.searchButton.click();
+      // Search for Raspberry
+      HomePage.searchField.type("Raspberry");
+      HomePage.searchField.type('{enter}');
+      // Select a product card - Raspberry Juice (1000ml)
+      HomePage.productClick.contains('Raspberry Juice (1000ml)').click();
+      // Type in review - "Tastes like metal"
+      HomePage.addReviewField.clear().type("Tastes like metal");
+      HomePage.addReviewField.should('have.value', 'Tastes like metal');
+      // Click Submit
+      HomePage.reviewSubmitButton.click();
+      // Click expand reviews button/icon (wait for reviews to appear)
+      HomePage.extendReviews.click();
+      // Validate review -  "Tastes like metal"
+      HomePage.extendReviews.should("contain.text","Tastes like metal")
+    })
+
 
     // Create scenario - Validate product card amount
     // Validate that the default amount of cards is 12

@@ -45,4 +45,11 @@ export class HomePage extends BasePage {
   static get extendReviews(){
     return cy.get("[aria-label=\"Expand for Reviews\"]");
   }
+
+  static get addReviewField(){
+    return cy.get("[aria-label=\"Text field to review a product\"]");
+  }
+  static get reviewSubmitButton(){
+    return cy.get("#submitButton");
+  }
 }
