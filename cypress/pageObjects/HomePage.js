@@ -62,4 +62,12 @@ export class HomePage extends BasePage {
   static get selectCount(){
     return cy.get(".mdc-list-item__primary-text");
   }
+
+  static get addToBasket(){
+    return cy.get("[aria-label=\"Add to Basket\"]");
+  }
+
+  static get yourCartButton(){
+    return cy.get("[aria-label=\"Show the shopping cart\"]");
+  }
 }
