@@ -1,5 +1,6 @@
 import { HomePage } from "../pageObjects/HomePage";
 import {LoginPage} from "../pageObjects/LoginPage";
+import {RegisterPage} from "../pageObjects/RegisterPage";
 
 describe("Juice-shop scenarios", () => {
   context("Without auto login", () => {
@@ -9,7 +10,7 @@ describe("Juice-shop scenarios", () => {
       HomePage.meWantItButton.click();
     });
 
-    it.only("Login", () => {
+    it("Login", () => {
       // Click Account button
       HomePage.accountButton.click();
       // Click Login button
@@ -26,23 +27,41 @@ describe("Juice-shop scenarios", () => {
       HomePage.usernameButton.should("contain.text","demo");
     });
 
-    it("Registration", () => {
+    it.only("Registration", () => {
       // Click Account button
+      HomePage.accountButton.click();
       // Login button
+      HomePage.loginButton.click();
       // Click "Not yet a customer?"
+      LoginPage.notCustomerButton.click();
       // Find - how to generate random number in JS
+      var emailNumber = Math.floor(Math.random() * 101);
       // Use that number to genarate unique email address, e.g.: email_7584@ebox.com
+      var email = "email_" + emailNumber.toString() + "@ebox.com";
       // Save that email address to some variable
+      RegisterPage.emailField.type(email);
       // Fill in password field and repeat password field with same password
+      var password = "password_" + emailNumber.toString();
+      RegisterPage.passwordField.type(password);
+      RegisterPage.repeatPasswordField.type(password);
       // Click on Security Question menu
+      RegisterPage.securityQuestionButton.click();
       // Select  "Name of your favorite pet?"
+      RegisterPage.favouritePetField.click();
       // Fill in answer
+      RegisterPage.answerField.type("cat");
       // Click Register button
+      RegisterPage.registerButton.click();
       // Set email value to previously created email
+      LoginPage.emailField.type(email);
       // Set password value to previously used password value
+      LoginPage.passwordField.type(password);
       // Click login button
+      LoginPage.loginButtonClick.click();
       // Click Account button
+      HomePage.accountButton.click();
       // Validate that account name (with previously created email address) appears in the menu section
+      HomePage.usernameButton.should("contain.text",email);
     });
   });
 

@@ -20,4 +20,8 @@ export class LoginPage extends BasePage {
   static get loginButtonClick() {
     return cy.get("#loginButton");
   }
+
+  static get notCustomerButton() {
+    return cy.get("[routerlink=\"/register\"]");
+  }
 }
