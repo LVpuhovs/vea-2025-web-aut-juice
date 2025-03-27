@@ -27,7 +27,7 @@ describe("Juice-shop scenarios", () => {
       HomePage.usernameButton.should("contain.text","demo");
     });
 
-    it.only("Registration", () => {
+    it("Registration", () => {
       // Click Account button
       HomePage.accountButton.click();
       // Login button
@@ -35,13 +35,13 @@ describe("Juice-shop scenarios", () => {
       // Click "Not yet a customer?"
       LoginPage.notCustomerButton.click();
       // Find - how to generate random number in JS
-      var emailNumber = Math.floor(Math.random() * 101);
+      const emailNumber = Math.floor(Math.random() * 101);
       // Use that number to genarate unique email address, e.g.: email_7584@ebox.com
-      var email = "email_" + emailNumber.toString() + "@ebox.com";
+      const email = "email_" + emailNumber.toString() + "@ebox.com";
       // Save that email address to some variable
       RegisterPage.emailField.type(email);
       // Fill in password field and repeat password field with same password
-      var password = "password_" + emailNumber.toString();
+      const password = "password_" + emailNumber.toString();
       RegisterPage.passwordField.type(password);
       RegisterPage.repeatPasswordField.type(password);
       // Click on Security Question menu
@@ -71,11 +71,16 @@ describe("Juice-shop scenarios", () => {
       HomePage.visit();
     });
 
-    it("Search and validate Lemon", () => {
+    it.only("Search and validate Lemon", () => {
       // Click on search icon
+      HomePage.searchButton.click();
       // Search for Lemon
+      HomePage.searchField.type("Lemon")
+      HomePage.searchField.type('{enter}')
       // Select a product card - Lemon Juice (500ml)
+      HomePage.productClick.click();
       // Validate that the card (should) contains "Sour but full of vitamins."
+      HomePage.containterInfo.should("contain.text","Sour but full of vitamins.");
     });
 
     // Create scenario - Search 500ml and validate Lemon, while having multiple cards
